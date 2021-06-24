@@ -48,9 +48,27 @@ class Pest extends Plugin {
 		const message = await getModule(m => m.default?.displayName === `Message`)
 
 		inject(`pest-message`, message, `default`, (args, resp) => {
-			if (args[0]?.childrenMessageContent?.props?.className?.includes(`blocked`)) {
-				return null
+			const props = args[0]?.childrenMessageContent?.props
+
+			if (props != null) {
+				if (props.className?.includes(`blocked`)) { 
+					return null
+				}
+
+				const mentions = props.message?.mentions
+
+				if (mentions != null && mentions.length > 0) {
+					for (const mention of mentions) {
+						if (isBlocked(mention)) {
+							return null
+						}
+					}
+				}
 			}
+
+			// if (args[0]?.childrenMessageContent?.props?.className?.includes(`blocked`)) {
+			// 	return null
+			// }
 
 			return resp
 		})
