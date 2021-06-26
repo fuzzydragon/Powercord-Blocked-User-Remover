@@ -54,16 +54,21 @@ class Pest extends Plugin {
 				if (props.className?.includes(`blocked`)) { 
 					return null
 				}
-
+ 
 				const mentions = props.message?.mentions
 
 				if (mentions != null && mentions.length > 0) {
-					for (const mention of mentions) {
-						if (isBlocked(mention)) {
-							return null
-						}
-					}
+					props.message.mentions = mentions.filter(mention => !isBlocked(mention))
+					mentions.every(mention => props.message.content = props.message.content.replace(`<@!${mention}>`, `\d`))
 				}
+				
+				// if (mentions != null && mentions.length > 0) {
+				// 	for (const mention of mentions) {
+				// 		if (isBlocked(mention)) {
+				// 			return null
+				// 		}
+				// 	}
+				// }
 			}
 
 			// if (args[0]?.childrenMessageContent?.props?.className?.includes(`blocked`)) {
@@ -73,7 +78,8 @@ class Pest extends Plugin {
 			return resp
 		})
 
-		message.default.displayName = `Message`
+		message.default.displayName = `Message` 
+
 	}
 }
 
