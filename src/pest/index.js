@@ -59,7 +59,7 @@ class Pest extends Plugin {
 
 				if (mentions != null && mentions.length > 0) {
 					props.message.mentions = mentions.filter(mention => !isBlocked(mention))
-					mentions.every(mention => props.message.content = props.message.content.replace(`<@!${mention}>`, `\d`))
+					mentions.every(mention => props.message.content = props.message.content.replace(`<@!${mention}>`, ``))
 				}
 				
 				// if (mentions != null && mentions.length > 0) {
