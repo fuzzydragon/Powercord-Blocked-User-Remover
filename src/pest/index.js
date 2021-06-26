@@ -55,12 +55,13 @@ class Pest extends Plugin {
 					return null
 				}
  
-				const mentions = props.message?.mentions
+				//causing issues? i don't know why ):
+				//const mentions = props.message?.mentions
 
-				if (mentions != null && mentions.length > 0) {
-					props.message.mentions = mentions.filter(mention => !isBlocked(mention))
-					mentions.every(mention => props.message.content = props.message.content.replace(`<@!${mention}>`, ``))
-				}
+				//if (mentions != null && mentions.length > 0) {
+					//props.message.mentions = mentions.filter(mention => !isBlocked(mention))
+					//mentions.every(mention => props.message.content = props.message.content.replace(`<@!${mention}>`, ``))
+				//}
 				
 				// if (mentions != null && mentions.length > 0) {
 				// 	for (const mention of mentions) {
